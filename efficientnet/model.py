@@ -104,15 +104,15 @@ def get_swish(**kwargs):
         Reference: [Searching for Activation Functions](https://arxiv.org/abs/1710.05941)
         """
 
-        if backend.backend() == 'tensorflow':
-            try:
-                # The native TF implementation has a more
-                # memory-efficient gradient implementation
-                return backend.tf.nn.swish(x)
-            except AttributeError:
-                pass
+        #if backend.backend() == 'tensorflow':
+        #    try:
+        #        # The native TF implementation has a more
+        #        # memory-efficient gradient implementation
+        #        return backend.tf.nn.swish(x)
+        #    except AttributeError:
+        #        pass
 
-        return x * backend.sigmoid(x)
+        return x * backend.tanh(backend.softplus(x))  # x * backend.sigmoid(x)
 
     return swish
 
